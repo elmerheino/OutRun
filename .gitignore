@@ -88,3 +88,5 @@ iOSInjectionProject/
 !.idea/codeStyles/*
 
 Podfile.lock
+
+.DS_Store
