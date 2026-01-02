@@ -74,7 +74,8 @@ enum ShareManager {
                 }
                 
                 let trackSegement = GPXTrackSegment()
-                trackSegement.trackpoints = trackPoints
+                trackSegement.add(trackpoints: trackPoints)
+                // trackSegement.trackpoints = trackPoints
                 track.add(trackSegment: trackSegement)
                 
             }

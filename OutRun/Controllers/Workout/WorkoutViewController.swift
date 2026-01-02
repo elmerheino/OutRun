@@ -19,7 +19,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 class WorkoutViewController: DetailViewController {
     

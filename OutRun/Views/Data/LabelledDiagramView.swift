@@ -19,7 +19,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
     
@@ -37,7 +37,7 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
         chart.rightAxis.labelTextColor = .secondaryColor
         chart.xAxis.labelTextColor = .secondaryColor
         
-        chart.chartDescription?.enabled = false
+        chart.chartDescription.enabled = false
         chart.xAxis.labelPosition = .bottom
         chart.leftAxis.enabled = false
         chart.legend.enabled = false
@@ -101,7 +101,7 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
                 values.append(entry)
             }
             
-            let set = LineChartDataSet(entries: values, label: nil)
+            let set = LineChartDataSet(entries: values, label: "nil")
             set.setColor(section.color as NSUIColor)
             set.lineWidth = 3
             set.drawCirclesEnabled = false
