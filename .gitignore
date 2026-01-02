@@ -86,3 +86,5 @@ iOSInjectionProject/
 # AppCode
 .idea/*
 !.idea/codeStyles/*
+
+Podfile.lock
