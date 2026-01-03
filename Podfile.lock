@@ -6,8 +6,8 @@ PODS:
     - SwiftAlgorithms (~> 1.0)
   - CombineExt (1.8.0)
   - CoreGPX (0.9.0)
-  - CoreStore (9.0.0)
-  - SnapKit (5.6.0)
+  - CoreStore (9.2.0)
+  - SnapKit (5.7.1)
   - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
@@ -30,13 +30,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
-  Charts: 354f86803d11d9c35de280587fef50d1af063978
+  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   CombineExt: c4daa97ef75754d8ef319bd79edeef82652f3eea
   CoreGPX: 1381c8c47428c3a6bcac2f93d25ca1c5e3525811
-  CoreStore: 1b820cd4d929750343479fd72585283a870973f4
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  CoreStore: 6e7e2010ce7b8ad9cf7348c650020c3d7ea0afb2
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
 PODFILE CHECKSUM: b4f324d21339e6e93aad2dc22f76ec7b558b40a5
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.2

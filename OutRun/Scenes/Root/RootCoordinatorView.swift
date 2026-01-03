@@ -36,10 +36,11 @@ struct RootCoordinatorView: View {
             case .setup:
                 SetupCoordinatorView(viewModel: viewModel.setupCoordinatorViewModel)
             case .main:
-                Text("Main App")
-                Button("Reset Setup") {
-                    UserPreferences.isSetUp.value = false
-                }
+                // Text("Main App")
+                // Button("Reset Setup") {
+                //     UserPreferences.isSetUp.value = false
+                // }
+                MainTabView()
             }
         }
     }
