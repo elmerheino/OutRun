@@ -25,6 +25,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     static var lastCurrent: TabBarController?
     
     private let placeholder = PlaceholderController()
+    // The addButtion, the orange one that starts a new workout
     private let addButton = UIButton()
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.barTintColor = .backgroundColor
         self.tabBar.isTranslucent = false
         
+        // So here the WorkoutListView is defined.
         let listController = WorkoutListViewController()
         let timeline = NavigationController(rootViewController: listController)
         timeline.tabBarItem = UITabBarItem(
@@ -43,7 +45,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             image: .tabbarTimeline,
             selectedImage: .tabbarTimelineFilled
         )
-        
+        // Settings view controller is defined, then is encapsulated in a NavigationController, which allows to stack information
         let settingsController = SettingsViewController()
         settingsController.settingsModelClosure = {
             return SettingsModel.custom
@@ -56,8 +58,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         )
         settings.tabBarItem = settingsTabBarItem
         
+        // Next the two view controllers are added
         self.viewControllers = [timeline, placeholder, settings]
         
+        // Here the appearance of the addButtion is defined.
         addButton.layer.cornerRadius = 29
         addButton.backgroundColor = .accentColor
         addButton.layer.borderColor = UIColor.backgroundColor.withAlphaComponent(0.2).cgColor
@@ -93,6 +97,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.addDebugGestureRecognizer()
     }
     
+    // Deinitializer of the controller. Invoked when the view is destroyed?
     deinit {
         if TabBarController.lastCurrent == self {
             TabBarController.lastCurrent = nil
