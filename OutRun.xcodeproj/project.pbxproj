@@ -99,7 +99,6 @@
 		22A0FAF124D8CB20000292DF /* WorkoutBuilder+Termination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0FAF024D8CB20000292DF /* WorkoutBuilder+Termination.swift */; };
 		22A0FAF324D8D4B7000292DF /* WorkoutCompletionActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0FAF224D8D4B7000292DF /* WorkoutCompletionActionHandler.swift */; };
 		22A6ED6923E18119006A3DD0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6ED6823E18119006A3DD0 /* TabBarController.swift */; };
-		22A6ED6B23E18271006A3DD0 /* PlaceholderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6ED6A23E18271006A3DD0 /* PlaceholderController.swift */; };
 		22AB2FB1233CA201002EF0DE /* WorkoutMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB2FB0233CA201002EF0DE /* WorkoutMapViewDelegate.swift */; };
 		22AB2FB3233CBDA4002EF0DE /* MapViewControllerWithContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB2FB2233CBDA4002EF0DE /* MapViewControllerWithContainerView.swift */; };
 		22AB2FB5233CC849002EF0DE /* UISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB2FB4233CC849002EF0DE /* UISegmentedControl.swift */; };
@@ -273,7 +272,6 @@
 		22A0FAF024D8CB20000292DF /* WorkoutBuilder+Termination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkoutBuilder+Termination.swift"; sourceTree = "<group>"; };
 		22A0FAF224D8D4B7000292DF /* WorkoutCompletionActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCompletionActionHandler.swift; sourceTree = "<group>"; };
 		22A6ED6823E18119006A3DD0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		22A6ED6A23E18271006A3DD0 /* PlaceholderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderController.swift; sourceTree = "<group>"; };
 		22AB2FB0233CA201002EF0DE /* WorkoutMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutMapViewDelegate.swift; sourceTree = "<group>"; };
 		22AB2FB2233CBDA4002EF0DE /* MapViewControllerWithContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerWithContainerView.swift; sourceTree = "<group>"; };
 		22AB2FB4233CC849002EF0DE /* UISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControl.swift; sourceTree = "<group>"; };
@@ -381,7 +379,6 @@
 				22A6ED6823E18119006A3DD0 /* TabBarController.swift */,
 				2248A45122F08E66000F82BB /* DetailViewController.swift */,
 				22AB2FB2233CBDA4002EF0DE /* MapViewControllerWithContainerView.swift */,
-				22A6ED6A23E18271006A3DD0 /* PlaceholderController.swift */,
 				2226A3BC240BF9AD00FF7A94 /* ProgressViewController.swift */,
 				22DDD319243B935C00FA262E /* ChangeLogViewController.swift */,
 			);
@@ -987,9 +984,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OutRun/Pods-OutRun-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OutRun/Pods-OutRun-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1181,7 +1182,6 @@
 				22623BFF22DFB811004065C6 /* WorkoutListHeader.swift in Sources */,
 				226E9A4923F00C0F00992815 /* TabBarSelectionObserver.swift in Sources */,
 				22585C20240AE0C70052E2CA /* Workout.swift in Sources */,
-				22A6ED6B23E18271006A3DD0 /* PlaceholderController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,30 +1,12 @@
-//
-//  WorkoutListViewController.swift
-//
-//  OutRun
-//  Copyright (C) 2020 Tim Fraedrich <timfraedrich@icloud.com>
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-
 import UIKit
 import CoreData
 import CoreStore
 
-class WorkoutListViewController: UITableViewController, ListSectionObserver, TabBarSelectionObserver {
+class WorkoutListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ListSectionObserver, TabBarSelectionObserver {
     
     typealias ListEntityType = Workout
+    
+    let tableView = UITableView()
     
     var lastKnownDistanceUnit: UnitLength?
     var sortType = WorkoutListSortType.day(true) {
@@ -47,14 +29,25 @@ class WorkoutListViewController: UITableViewController, ListSectionObserver, Tab
         numberOfLines: 0,
         textAlignment: .center
     )
+    
+    private let addButton = UIButton()
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         DataManager.workoutMonitor.addObserver(self)
         
-        super.viewDidLoad()
-        self.tableView.backgroundColor = .backgroundColor
+        self.view.backgroundColor = .backgroundColor
         
-        self.tableView.separatorStyle = .none
+        self.view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .backgroundColor
+        tableView.separatorStyle = .none
+        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         self.navigationItem.title = LS("WorkoutListViewController.Headline", comment: "")
         
@@ -69,12 +62,50 @@ class WorkoutListViewController: UITableViewController, ListSectionObserver, Tab
         self.lastKnownDistanceUnit = UserPreferences.distanceMeasurementType.safeValue
         
         self.navigationItem.rightBarButtonItem = sortItem
+        
+        // 5. NEW: Add Button to self.view (NOT tableView)
+        // This ensures it floats above the table and doesn't scroll
+        self.view.addSubview(addButton)
+        
+        addButton.layer.cornerRadius = 29
+        addButton.backgroundColor = .accentColor
+        addButton.layer.borderColor = UIColor.backgroundColor.withAlphaComponent(0.2).cgColor
+        addButton.layer.borderWidth = 4
+        
+        // Optional: Add shadow for better visibility
+        addButton.layer.shadowColor = UIColor.black.cgColor
+        addButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        addButton.layer.shadowOpacity = 0.3
+        addButton.layer.shadowRadius = 4
+
+        addButton.addTarget(self, action: #selector(showNewWorkoutController), for: .touchUpInside)
+        
+        addButton.snp.makeConstraints { (make) in
+            // Pin to Safe Area of the main VIEW, not the table
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.width.height.equalTo(58)
+        }
+        
+        let plusIcon = UIImageView(image: .tabbarPlus)
+        plusIcon.tintColor = .white
+        addButton.addSubview(plusIcon)
+        plusIcon.snp.makeConstraints { (make) in
+            make.centerX.centerY.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
+
     }
     
     deinit {
         DataManager.workoutMonitor.removeObserver(self)
     }
     
+    @objc private func showNewWorkoutController() {
+        let controller = NewWorkoutViewController()
+        self.showDetailViewController(controller, sender: self)
+    }
+
     func willGetSelected() {
         if lastKnownDistanceUnit != UserPreferences.distanceMeasurementType.safeValue {
             self.lastKnownDistanceUnit = UserPreferences.distanceMeasurementType.safeValue
@@ -88,26 +119,27 @@ class WorkoutListViewController: UITableViewController, ListSectionObserver, Tab
 
     // MARK: TableView
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    // 6. CHANGE: Removed 'override' keyword from these methods
+    func numberOfSections(in tableView: UITableView) -> Int {
         let sections = DataManager.workoutMonitor.numberOfSections()
         self.noDataLabel.isHidden = DataManager.workoutMonitor.numberOfObjects() != 0
         return sections
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sectionCount = DataManager.workoutMonitor.numberOfObjects(safelyIn: section) else {
             return 0
         }
         return sectionCount
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let workout = DataManager.workoutMonitor[indexPath.section, indexPath.row]
         let cell = WorkoutListCell(workout: workout)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let workout = DataManager.workoutMonitor[indexPath.section, indexPath.row]
         
@@ -178,10 +210,7 @@ class WorkoutListViewController: UITableViewController, ListSectionObserver, Tab
             delay: 0,
             options: .beginFromCurrentState,
             animations: { () -> Void in
-                if let tableView = self.tableView {
-                    
-                    tableView.alpha = enabled ? 1.0 : 0.5
-                }
+                self.tableView.alpha = enabled ? 1.0 : 0.5
             },
             completion: nil
         )

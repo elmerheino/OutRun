@@ -24,10 +24,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     static var lastCurrent: TabBarController?
     
-    private let placeholder = PlaceholderController()
-    // The addButtion, the orange one that starts a new workout
-    private let addButton = UIButton()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -59,34 +55,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         settings.tabBarItem = settingsTabBarItem
         
         // Next the two view controllers are added
-        self.viewControllers = [timeline, placeholder, settings]
-        
-        // Here the appearance of the addButtion is defined.
-        addButton.layer.cornerRadius = 29
-        addButton.backgroundColor = .accentColor
-        addButton.layer.borderColor = UIColor.backgroundColor.withAlphaComponent(0.2).cgColor
-        addButton.layer.borderWidth = 4
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(displayNewWorkoutAlert))
-        addButton.addGestureRecognizer(longPressGesture)
-        
-        addButton.addTarget(self, action: #selector(showNewWorkoutController), for: .touchUpInside)
-        
-        self.tabBar.addSubview(addButton)
-        
-        addButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(self.tabBar.safeAreaInsets.top).offset(20)
-            make.width.height.equalTo(58)
-        }
-        let plusIcon = UIImageView(image: .tabbarPlus)
-        plusIcon.tintColor = .white
-        addButton.addSubview(plusIcon)
-        plusIcon.snp.makeConstraints { (make) in
-            make.centerX.centerY.equalToSuperview()
-            make.width.height.equalTo(20)
-        }
-        
+        self.viewControllers = [timeline, settings]
+
         let bgrdView = UIView()
         bgrdView.backgroundColor = .backgroundColor
         self.tabBar.insertSubview(bgrdView, at: 0)
@@ -105,9 +75,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController is PlaceholderController {
-            return false
-        }
         if let selectionObserver = viewController.findFirstNonTabOrNavigationController() as? TabBarSelectionObserver {
             selectionObserver.willGetSelected()
         }
@@ -115,16 +82,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             currentSelectionObserver.willGetDeselected(newController: viewController)
         }
         return true
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        if #available(iOS 13.0, *) {
-            if previousTraitCollection?.hasDifferentColorAppearance(comparedTo: traitCollection) ?? false {
-                self.addButton.layer.borderColor = UIColor.foregroundColor.withAlphaComponent(0.2).cgColor
-            }
-        }
     }
     
     @objc private func displayNewWorkoutAlert(sender: UILongPressGestureRecognizer) {
