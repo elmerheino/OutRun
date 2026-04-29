@@ -37,11 +37,19 @@ class NewWorkoutViewController: MapViewControllerWithConatinerView, WorkoutBuild
     }
     
     let readinessIndicatorView = WorkoutBuilderReadinessIndicationView()
-    lazy var typeView = FloatingButton(title: self.type.description) { (button) in
+    
+    lazy var typeView: LabelledWorkoutTypeView = {
+        let view = LabelledWorkoutTypeView(type: self.type)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showTypeAlert)))
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+    
+    @objc func showTypeAlert() {
         let alert = WorkoutTypeAlert(
             action: { (type) in
                 self.builder.workoutType = type
-                button.setTitle(type.description.uppercased(), for: .normal)
+                self.typeView.type = type
             }
         )
         alert.present(on: self)
@@ -175,41 +183,39 @@ class NewWorkoutViewController: MapViewControllerWithConatinerView, WorkoutBuild
         
         let spacing: CGFloat = 20
         
-        distanceView.snp.makeConstraints { (make) in
+        typeView.snp.makeConstraints { (make) in
             make.top.equalTo(containerView.snp.top).offset(spacing)
             make.left.equalTo(containerView.snp.left).offset(spacing)
         }
-        durationView.snp.makeConstraints { (make) in
+        
+        distanceView.snp.makeConstraints { (make) in
             make.top.equalTo(containerView.snp.top).offset(spacing)
-            make.left.equalTo(distanceView.snp.right).offset(spacing)
+            make.left.equalTo(typeView.snp.right).offset(spacing)
             make.right.equalTo(containerView.snp.right).offset(-spacing)
-            make.width.equalTo(distanceView)
+            make.width.equalTo(typeView)
+        }
+        durationView.snp.makeConstraints { (make) in
+            make.top.equalTo(typeView.snp.bottom).offset(spacing)
+            make.left.equalTo(containerView.snp.left).offset(spacing)
         }
         speedIndication.snp.makeConstraints { (make) in
             make.top.equalTo(distanceView.snp.bottom).offset(spacing)
-            make.left.equalTo(containerView.snp.left).offset(spacing)
+            make.left.equalTo(durationView.snp.right).offset(spacing)
+            make.right.equalTo(containerView.snp.right).offset(-spacing)
+            make.width.equalTo(durationView)
         }
         caloriesView.snp.makeConstraints { (make) in
             make.top.equalTo(durationView.snp.bottom).offset(spacing)
-            make.left.equalTo(speedIndication.snp.right).offset(spacing)
-            make.right.equalTo(containerView.snp.right).offset(-spacing)
-            make.width.equalTo(speedIndication)
-        }
-        
-        typeView.snp.makeConstraints { (make) in
-            make.top.equalTo(speedIndication.snp.bottom).offset(spacing)
             make.left.equalTo(containerView.snp.left).offset(spacing)
-            make.bottom.equalTo(safeLayout).offset(-spacing)
-            make.height.equalTo(50)
-            make.width.equalTo(containerView.snp.width).multipliedBy(0.3).offset(-spacing)
         }
         
         actionButton.snp.makeConstraints { (make) in
             make.top.equalTo(speedIndication.snp.bottom).offset(spacing)
-            make.left.equalTo(typeView.snp.right).offset(spacing)
+            make.left.equalTo(caloriesView.snp.right).offset(spacing)
             make.right.equalTo(containerView.snp.right).offset(-spacing)
             make.bottom.equalTo(safeLayout).offset(-spacing)
             make.height.equalTo(50)
+            make.width.equalTo(caloriesView)
         }
     }
     

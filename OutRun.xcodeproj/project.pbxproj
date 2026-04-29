@@ -85,6 +85,7 @@
 		228BD39023EB51910019C322 /* BackupDocumentPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD38F23EB51910019C322 /* BackupDocumentPickerDelegate.swift */; };
 		229186332367909D00929885 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229186322367909D00929885 /* PolicyViewController.swift */; };
 		2291863A23679AA300929885 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2291863C23679AA300929885 /* InfoPlist.strings */; };
+		229493BD9FD3E305D4EFCDC4 /* LabelledWorkoutTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C026EBB9D1D704B33AE12238 /* LabelledWorkoutTypeView.swift */; };
 		2298D2102345496600344989 /* OutRunV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298D20F2345496600344989 /* OutRunV1.swift */; };
 		2298D2142345524C00344989 /* WorkoutBuilderTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298D2132345524C00344989 /* WorkoutBuilderTypeView.swift */; };
 		2298D2162345553F00344989 /* HealthStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298D2152345553F00344989 /* HealthStoreManager.swift */; };
@@ -347,6 +348,7 @@
 		22FEA0B024CDDFF80007CA9C /* CustomByteFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomByteFormatting.swift; sourceTree = "<group>"; };
 		22FEA0B224CDE31E0007CA9C /* DebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugController.swift; sourceTree = "<group>"; };
 		8C0699EE439FF3DC5E16B8E0 /* Pods-OutRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutRun/Pods-OutRun.debug.xcconfig"; sourceTree = "<group>"; };
+		C026EBB9D1D704B33AE12238 /* LabelledWorkoutTypeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LabelledWorkoutTypeView.swift; sourceTree = "<group>"; };
 		C1C8D965F1351F85D4E4F35D /* Pods-OutRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-OutRun/Pods-OutRun.release.xcconfig"; sourceTree = "<group>"; };
 		D2DC1601B9458B3FC1788F0E /* Pods_OutRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OutRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -813,6 +815,7 @@
 				22B2A89E230D2FC800EF8558 /* LabelledTimeView.swift */,
 				22B2A89C230D298F00EF8558 /* LabelledDiagramView.swift */,
 				22558388242E94AE0043432F /* LoadingView.swift */,
+				C026EBB9D1D704B33AE12238 /* LabelledWorkoutTypeView.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1182,6 +1185,7 @@
 				22623BFF22DFB811004065C6 /* WorkoutListHeader.swift in Sources */,
 				226E9A4923F00C0F00992815 /* TabBarSelectionObserver.swift in Sources */,
 				22585C20240AE0C70052E2CA /* Workout.swift in Sources */,
+				229493BD9FD3E305D4EFCDC4 /* LabelledWorkoutTypeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
