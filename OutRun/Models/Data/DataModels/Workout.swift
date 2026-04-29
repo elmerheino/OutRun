@@ -112,7 +112,7 @@ extension Workout: CustomStringConvertible {
     }
     
     enum WorkoutType: CustomStringConvertible, CustomDebugStringConvertible {
-        case running, walking, cycling, skating, hiking, unknown
+        case running, walking, cycling, skating, hiking, crossCountrySkiing, unknown
         
         init(rawValue: Int) {
             switch rawValue {
@@ -126,6 +126,8 @@ extension Workout: CustomStringConvertible {
                 self = .skating
             case 4:
                 self = .hiking
+            case 5:
+                self = .crossCountrySkiing
             default:
                 self = .unknown
             }
@@ -143,6 +145,8 @@ extension Workout: CustomStringConvertible {
                 self = .skating
             case .hiking:
                 self = .hiking
+            case .crossCountrySkiing:
+                self = .crossCountrySkiing
             default:
                 return nil
             }
@@ -160,6 +164,8 @@ extension Workout: CustomStringConvertible {
                 return 3
             case .hiking:
                 return 4
+            case .crossCountrySkiing:
+                return 5
             case .unknown:
                 return -1
             }
@@ -177,6 +183,8 @@ extension Workout: CustomStringConvertible {
                 return LS("Workout.Type.Skating")
             case .hiking:
                 return LS("Workout.Type.Hiking")
+            case .crossCountrySkiing:
+                return LS("Workout.Type.CrossCountrySkiing")
             case .unknown:
                 return LS("Workout.Type.Unknown")
             }
@@ -194,6 +202,8 @@ extension Workout: CustomStringConvertible {
                 return "Skating"
             case .hiking:
                 return "Hiking"
+            case .crossCountrySkiing:
+                return "CrossCountrySkiing"
             case .unknown:
                 return "Unknown"
             }
@@ -207,7 +217,7 @@ extension Workout: CustomStringConvertible {
                 return 0.655
             case .cycling:
                 return 0.450
-            case .skating:
+            case .skating, .crossCountrySkiing:
                 return 0.560
             case .unknown:
                 return 0
@@ -226,6 +236,8 @@ extension Workout: CustomStringConvertible {
                 return .skatingSports
             case .hiking:
                 return .hiking
+            case .crossCountrySkiing:
+                return .crossCountrySkiing
             case .unknown:
                 return .other
             }

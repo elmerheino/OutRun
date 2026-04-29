@@ -150,12 +150,12 @@ class NewWorkoutViewController: MapViewControllerWithConatinerView, WorkoutBuild
         
         // MARK: adding views to superview
         self.view.addSubview(readinessIndicatorView)
-        self.view.addSubview(typeView)
         self.view.addSubview(recenterButton)
         
         let speedIndication = UserPreferences.usePaceForSpeedDisplay.value ? paceView : speedView
         
         // MARK: adding views to statsView
+        self.containerView.addSubview(typeView)
         self.containerView.addSubview(distanceView)
         self.containerView.addSubview(durationView)
         self.containerView.addSubview(speedIndication)
@@ -167,10 +167,6 @@ class NewWorkoutViewController: MapViewControllerWithConatinerView, WorkoutBuild
         readinessIndicatorView.snp.makeConstraints { (make) in
             make.bottom.equalTo(containerView.snp.top).offset(-10)
             make.right.equalTo(safeLayout).offset(-10)
-        }
-        typeView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(containerView.snp.top).offset(-10)
-            make.left.equalTo(safeLayout).offset(10)
         }
         recenterButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(readinessIndicatorView.snp.top).offset(-10)
@@ -199,9 +195,18 @@ class NewWorkoutViewController: MapViewControllerWithConatinerView, WorkoutBuild
             make.right.equalTo(containerView.snp.right).offset(-spacing)
             make.width.equalTo(speedIndication)
         }
-        actionButton.snp.makeConstraints { (make) in
+        
+        typeView.snp.makeConstraints { (make) in
             make.top.equalTo(speedIndication.snp.bottom).offset(spacing)
             make.left.equalTo(containerView.snp.left).offset(spacing)
+            make.bottom.equalTo(safeLayout).offset(-spacing)
+            make.height.equalTo(50)
+            make.width.equalTo(containerView.snp.width).multipliedBy(0.3).offset(-spacing)
+        }
+        
+        actionButton.snp.makeConstraints { (make) in
+            make.top.equalTo(speedIndication.snp.bottom).offset(spacing)
+            make.left.equalTo(typeView.snp.right).offset(spacing)
             make.right.equalTo(containerView.snp.right).offset(-spacing)
             make.bottom.equalTo(safeLayout).offset(-spacing)
             make.height.equalTo(50)

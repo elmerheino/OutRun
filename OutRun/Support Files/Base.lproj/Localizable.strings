@@ -113,6 +113,7 @@
 "Workout.Type.Cycling" = "Cycling";
 "Workout.Type.Skating" = "Skating";
 "Workout.Type.Hiking" = "Hiking";
+"Workout.Type.CrossCountrySkiing" = "Cross-Country Skiing";
 "Workout.Type.Unknown" = "Unknown";
 "Workout.Race" = "Race";
 "Workout.Comment" = "Comment";
