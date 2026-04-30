@@ -28,6 +28,17 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
         font: .systemFont(ofSize: 14, weight: .bold)
     )
     
+    private let expandButton: UIButton = {
+        let btn = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            btn.setImage(UIImage(systemName: "arrow.up.left.and.arrow.down.right"), for: .normal)
+        } else {
+            btn.setTitle("Expand", for: .normal)
+        }
+        btn.tintColor = .secondaryColor
+        return btn
+    }()
+    
     let diagram: LineChartView = {
         let chart = LineChartView()
         
@@ -50,6 +61,7 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
     
     var delegate: LabelledDiagramViewDelegate?
     var title: String
+    private var chartSections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])]?
     
     init(title: String, sections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])]? = nil, delegate: LabelledDiagramViewDelegate? = nil) {
         self.title = title
@@ -65,12 +77,20 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
         }
         
         self.addSubview(headlineLabel)
+        self.addSubview(expandButton)
         self.addSubview(diagram)
+        
+        expandButton.addTarget(self, action: #selector(expandChart), for: .touchUpInside)
         
         headlineLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
+            make.right.equalTo(expandButton.snp.left).offset(-10)
+        }
+        expandButton.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
             make.right.equalToSuperview()
+            make.width.height.equalTo(24)
         }
         diagram.snp.makeConstraints { (make) in
             make.top.equalTo(headlineLabel.snp.bottom).offset(5)
@@ -87,6 +107,8 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
     }
     
     func setData(for sections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])]) {
+        
+        self.chartSections = sections
         
         var dataSets = [LineChartDataSet]()
         
@@ -145,5 +167,12 @@ class LabelledDiagramView: UIView, ChartViewDelegate, BigStatView {
     func disableSelection() {
         self.diagram.highlightPerTapEnabled = false
         self.diagram.highlightPerDragEnabled = false
+    }
+    
+    @objc func expandChart() {
+        guard let chartSections = self.chartSections else {
+            return
+        }
+        delegate?.didRequestFullscreenChart(title: self.title, sections: chartSections)
     }
 }

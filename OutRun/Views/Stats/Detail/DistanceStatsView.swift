@@ -24,8 +24,11 @@ import DGCharts
 class DistanceStatsView: StatsView {
     
     let altitudeChart: LabelledDiagramView?
+    var delegate: LabelledDiagramViewDelegate?
     
-    init(stats: WorkoutStats) {
+    init(stats: WorkoutStats, delegate: LabelledDiagramViewDelegate? = nil) {
+        
+        self.delegate = delegate
         
         var statViews = [StatView]()
         
@@ -39,7 +42,7 @@ class DistanceStatsView: StatsView {
         if stats.descendingAltitude != nil {
             statViews.append(LabelledDataView(title: LS("WorkoutStats.DescendingAltitude"), measurement: stats.descendingAltitude, isAltitude: true))
         }
-        self.altitudeChart = stats.hasRouteSamples ? LabelledDiagramView(title: LS("WorkoutStats.AltitudeOverTime")) : nil
+        self.altitudeChart = stats.hasRouteSamples ? LabelledDiagramView(title: LS("WorkoutStats.AltitudeOverTime"), delegate: delegate) : nil
         if let altit = self.altitudeChart {
             statViews.append(altit)
         }

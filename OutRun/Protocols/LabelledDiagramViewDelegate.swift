@@ -23,11 +23,13 @@ import UIKit
 protocol LabelledDiagramViewDelegate {
     
     func didSelect(sample: TempWorkoutSeriesDataSampleType)
+    func didRequestFullscreenChart(title: String, sections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])])
     
 }
 
 extension LabelledDiagramViewDelegate {
     
     func didSelect(sample: TempWorkoutSeriesDataSampleType) {}
+    func didRequestFullscreenChart(title: String, sections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])]) {}
     
 }

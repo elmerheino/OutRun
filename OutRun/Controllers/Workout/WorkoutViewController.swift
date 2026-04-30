@@ -21,7 +21,7 @@
 import UIKit
 import DGCharts
 
-class WorkoutViewController: DetailViewController {
+class WorkoutViewController: DetailViewController, LabelledDiagramViewDelegate {
     
     var workout: Workout?
     
@@ -98,9 +98,9 @@ class WorkoutViewController: DetailViewController {
                     return
                 }
                 
-                let distanceStatsView = DistanceStatsView(stats: stats)
+                let distanceStatsView = DistanceStatsView(stats: stats, delegate: self)
                 let timeStatsView = TimeStatsView(stats: stats)
-                let speedStatsView = SpeedStatsView(stats: stats)
+                let speedStatsView = SpeedStatsView(stats: stats, delegate: self)
                 let energyStatsView = EnergyStatsView(stats: stats)
                 let routeStatsView = RouteStatsView(controller: self, workout: workout, stats: stats)
                 let deleteView = DeleteWorkoutView(controller: self, workout: workout)
@@ -248,6 +248,13 @@ class WorkoutViewController: DetailViewController {
             let shareAlert = WorkoutShareAlert(controller: self, workout: workout)
             self.present(shareAlert, animated: true)
         }
+    }
+    
+    // MARK: - LabelledDiagramViewDelegate
+    
+    func didRequestFullscreenChart(title: String, sections: [(color: UIColor, data: [(Measurement<Unit>, Measurement<Unit>)], samples: [TempWorkoutSeriesDataSampleType])]) {
+        let fullscreenController = FullscreenChartViewController(title: title, sections: sections)
+        self.present(fullscreenController, animated: true)
     }
     
 }

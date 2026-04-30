@@ -23,8 +23,11 @@ import UIKit
 class SpeedStatsView: StatsView {
     
     let speedChart: LabelledDiagramView?
+    var delegate: LabelledDiagramViewDelegate?
     
-    init(stats: WorkoutStats) {
+    init(stats: WorkoutStats, delegate: LabelledDiagramViewDelegate? = nil) {
+        
+        self.delegate = delegate
         
         var statViews = [StatView]()
         
@@ -33,7 +36,7 @@ class SpeedStatsView: StatsView {
         
         if stats.hasRouteSamples {
             let topSpeedView = LabelledDataView(title: LS("WorkoutStats.TopSpeed"), measurement: stats.topSpeed)
-            self.speedChart = LabelledDiagramView(title: LS("WorkoutStats.SpeedOverTime"))
+            self.speedChart = LabelledDiagramView(title: LS("WorkoutStats.SpeedOverTime"), delegate: delegate)
             statViews.append(contentsOf: [topSpeedView, speedChart!])
         } else {
             self.speedChart = nil
